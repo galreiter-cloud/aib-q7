@@ -1,0 +1,157 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><title>AI-BRIDGE Questions for Ram</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap">
+<style>
+/* Layout: one calm reading column; each question a card; ticked items open their follow-up lines. */
+:root{--bg:#f4f7f7;--card:#ffffff;--fg:#17242a;--mute:#5b6b70;--line:#d8e1e3;--accent:#0f5257;--accent-fg:#ffffff;--soft:#e3eeef;--ok:#1f7a45;--warn:#9a5b00;
+--display:"Space Grotesk",system-ui,sans-serif;--body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1719;--card:#162225;--fg:#e4eeef;--mute:#9db0b4;--line:#2a3a3e;--accent:#5fb3b9;--accent-fg:#06272a;--soft:#1d3135;--ok:#6fcf97;--warn:#f2b45c;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1719;--card:#162225;--fg:#e4eeef;--mute:#9db0b4;--line:#2a3a3e;--accent:#5fb3b9;--accent-fg:#06272a;--soft:#1d3135;--ok:#6fcf97;--warn:#f2b45c;color-scheme:dark}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font:16px/1.55 var(--body)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:760px;margin:0 auto;padding-block:24px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1{font:600 clamp(26px,5.5vw,34px)/1.15 var(--display);color:var(--accent);margin:8px 0 12px;text-wrap:balance}
+.intro p{color:var(--mute);margin:0 0 10px;max-width:65ch}
+.status{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding:10px 0;display:flex;flex-direction:column;gap:6px}
+.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .25s}
+.meta{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--mute);font-variant-numeric:tabular-nums}
+.saved{color:var(--ok)}.saving{color:var(--mute)}.warn{color:var(--warn)}
+h2{font:600 20px/1.3 var(--display);color:var(--accent);margin:32px 0 12px;letter-spacing:.01em}
+.q{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin:0 0 14px}
+.q .t{font-weight:600;margin:0 0 4px}
+.q .n{color:var(--mute);font-size:14px;margin:0 0 10px}
+.many{color:var(--mute);font-weight:400;font-size:13px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.chip span{display:inline-flex;align-items:center;min-height:40px;padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--fg);font-size:15px;cursor:pointer;user-select:none}
+.chip input:checked+span{background:var(--accent);border-color:var(--accent);color:var(--accent-fg)}
+.chip input:focus-visible+span{outline:3px solid var(--soft);outline-offset:2px}
+.fill,.rowname,textarea{width:100%;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--fg);font:inherit;padding:8px 12px}
+.fill{max-width:360px;min-height:40px;margin-top:8px}
+.row{border-top:1px solid var(--line);padding:12px 0 4px}
+.row:first-of-type{border-top:0}
+.rowhead{display:flex;align-items:center;gap:10px;min-height:40px;cursor:pointer;font-weight:600}
+.rowhead input{width:22px;height:22px;accent-color:var(--accent);flex:none;cursor:pointer}
+.rowname{max-width:360px;min-height:40px;margin:6px 0 0 32px;width:calc(100% - 32px)}
+.rowbody{margin:6px 0 6px 32px;min-width:0}
+.line{margin:8px 0 10px}
+.line>b{display:block;font-weight:500;color:var(--mute);font-size:14px}
+textarea{min-height:120px}
+.done{margin-top:24px;padding:16px;border-radius:12px;background:var(--soft);color:var(--fg)}
+.owner{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin:16px 0}
+.owner h2{margin-top:0}
+.owner .who{font-weight:600;margin:12px 0 6px}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{color:var(--mute);font-weight:500}
+@media (max-width:520px){.q{padding:14px}.rowbody,.rowname{margin-left:0;width:100%}}
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}}
+</style></head><body>
+<div class="wrap">
+<header class="intro">
+<h1>AI-BRIDGE: questions for Ram</h1>
+<p>The goal: to understand what we spend today and what we will spend as we grow. Every answer becomes a building block in the business model that we can switch on, off or change later. Nothing here is final. These are high-level questions; a short follow-up will go into the details.</p>
+<p>Tap an answer to choose it. Where it says so, you can choose more than one. If nothing fits, choose Other and write yours. Rough answers are fine. <b>Your answers reach Gal by themselves as you go. There is nothing to send.</b></p>
+</header>
+<div class="status"><div class="bar"><i id="bar"></i></div><div class="meta"><span id="count"></span><span id="save" class="saving">Your answers will reach Gal by themselves</span></div></div>
+<main id="parts"></main>
+<p class="done" id="done">That's it. Your answers reach Gal by themselves a minute after your last change. You can come back to this page and change answers at any time.</p>
+</div>
+<script id="data" type="application/json">[{"head": "1. Product and timeline", "qs": [{"type": "single", "q": "When is the Israel product ready for a beta (trial with customers)?", "opts": ["By 03/2027", "By 06/2027", "By 12/2027", "Other: ______________________"]}, {"type": "single", "q": "When do the first customers pay in Israel?", "opts": ["By 06/2027", "By 09/2027", "By 12/2027", "Other: ______________________"]}, {"type": "block", "q": "Development runs in parallel. Which products do we build, and how long does each take?", "note": "Tick a product, then how long until it is ready. Leave it empty if we don't build it.", "rows": [{"label": "BUSINESS (model on the office network)", "lines": [{"label": "Ready in", "opts": ["3 months", "6 months", "12 months", "Other: ______"]}]}, {"label": "Audit for the regulator", "lines": [{"label": "Ready in", "opts": ["3 months", "6 months", "12 months", "Other: ______"]}]}, {"label": "Word, PowerPoint and Outlook", "lines": [{"label": "Ready in", "opts": ["3 months", "6 months", "12 months", "Other: ______"]}]}, {"label": "Other product: ________________", "lines": [{"label": "Ready in", "opts": ["3 months", "6 months", "12 months", "Other: ______"]}]}]}]}, {"head": "2. New countries", "qs": [{"type": "single", "q": "How long does it take to get the model ready for a new country (language and law)?", "opts": ["2 months", "4 months", "6 months", "Other: ______________________"]}, {"type": "block", "q": "What does one new country cost us? Hardware and people separately. (Translation is done by AI.)", "note": "Tick each cost that applies, then its amount per country.", "rows": [{"label": "Hardware for training (servers, GPUs)", "lines": [{"label": "Per country", "opts": ["$0 - what we have is enough", "$10,000", "$25,000", "Other: ______"]}]}, {"label": "Data and training in the cloud", "lines": [{"label": "Per country", "opts": ["$10,000", "$20,000", "$40,000", "Other: ______"]}]}, {"label": "Dedicated people for the country (e.g. a local person in the loop)", "lines": [{"label": "How many", "opts": ["1", "2", "Other: ______"]}, {"label": "Cost per person per month", "opts": ["$4,000", "$6,500", "$8,000", "Other: ______"]}]}, {"label": "Local legal opinion", "lines": [{"label": "Per country", "opts": ["$8,000", "$15,000", "$30,000", "Other: ______"]}]}, {"label": "Other: ________________", "lines": [{"label": "Per country", "opts": ["Other: ______"]}]}]}, {"type": "single", "q": "How do we sell abroad?", "opts": ["From Israel through partners", "Open a local company", "Partners first, local company later", "Other: ______________________"]}]}, {"head": "3. Team: AI agents and people", "qs": [{"type": "block", "q": "Development and most of the work are done by AI agents, with people in the loop who guide and check them. How many people in the loop does each area need - and what makes us add more?", "note": "Think in steps: if X happens, we add Y people. Tick an area, then fill each step that applies to it.", "rows": [{"label": "Development", "lines": [{"label": "Today", "opts": ["0", "1", "2", "Other: ______"]}, {"label": "After the raise, add", "opts": ["+0", "+1", "+2", "Other: ______"]}, {"label": "For each new country, add", "opts": ["+0", "+1", "Other: ______"]}, {"label": "For every ___ paying customers, add", "opts": ["+1", "+2", "Other: ______"]}]}, {"label": "Model training (language and law)", "lines": [{"label": "Today", "opts": ["0", "1", "2", "Other: ______"]}, {"label": "After the raise, add", "opts": ["+0", "+1", "+2", "Other: ______"]}, {"label": "For each new country, add", "opts": ["+0", "+1", "Other: ______"]}, {"label": "For every ___ paying customers, add", "opts": ["+1", "+2", "Other: ______"]}]}, {"label": "Support", "lines": [{"label": "Today", "opts": ["0", "1", "2", "Other: ______"]}, {"label": "After the raise, add", "opts": ["+0", "+1", "+2", "Other: ______"]}, {"label": "For each new country, add", "opts": ["+0", "+1", "Other: ______"]}, {"label": "For every ___ paying customers, add", "opts": ["+1", "+2", "Other: ______"]}]}, {"label": "Marketing and content", "lines": [{"label": "Today", "opts": ["0", "1", "2", "Other: ______"]}, {"label": "After the raise, add", "opts": ["+0", "+1", "+2", "Other: ______"]}, {"label": "For each new country, add", "opts": ["+0", "+1", "Other: ______"]}, {"label": "For every ___ paying customers, add", "opts": ["+1", "+2", "Other: ______"]}]}, {"label": "Sales and partners", "lines": [{"label": "Today", "opts": ["0", "1", "2", "Other: ______"]}, {"label": "After the raise, add", "opts": ["+0", "+1", "+2", "Other: ______"]}, {"label": "For each new country, add", "opts": ["+0", "+1", "Other: ______"]}, {"label": "For every ___ paying customers, add", "opts": ["+1", "+2", "Other: ______"]}]}, {"label": "Other area: ________________", "lines": [{"label": "Today", "opts": ["0", "1", "2", "Other: ______"]}, {"label": "After the raise, add", "opts": ["+0", "+1", "+2", "Other: ______"]}, {"label": "For each new country, add", "opts": ["+0", "+1", "Other: ______"]}, {"label": "For every ___ paying customers, add", "opts": ["+1", "+2", "Other: ______"]}]}]}, {"type": "block", "q": "Which paid roles do we need in the next 3 years?", "note": "Tick a role, then when we hire and the pay. 'Shares only' = equity instead of salary. Leave a role empty if we don't need it.", "rows": [{"label": "Founders", "lines": [{"label": "When", "opts": ["At the start", "After the raise", "With a new country", "After ___ customers", "Date: ______"]}, {"label": "Gross per founder per month", "opts": ["₪30,000", "₪35,000", "₪42,000", "Shares only, no salary", "Other: ______"]}]}, {"label": "Developer (person in the loop)", "lines": [{"label": "When", "opts": ["At the start", "After the raise", "With a new country", "After ___ customers", "Date: ______"]}, {"label": "Gross per month", "opts": ["₪35,000", "₪42,000", "₪50,000", "Shares only, no salary", "Other: ______"]}]}, {"label": "ML / language-model engineer", "lines": [{"label": "When", "opts": ["At the start", "After the raise", "With a new country", "After ___ customers", "Date: ______"]}, {"label": "Gross per month", "opts": ["₪40,000", "₪48,000", "₪58,000", "Shares only, no salary", "Other: ______"]}]}, {"label": "DevOps / security", "lines": [{"label": "When", "opts": ["At the start", "After the raise", "With a new country", "After ___ customers", "Date: ______"]}, {"label": "Gross per month", "opts": ["₪35,000", "₪42,000", "₪50,000", "Shares only, no salary", "Other: ______"]}]}, {"label": "Support", "lines": [{"label": "When", "opts": ["At the start", "After the raise", "With a new country", "After ___ customers", "Date: ______"]}, {"label": "Gross per month", "opts": ["₪12,000", "₪15,000", "₪20,000", "Shares only, no salary", "Other: ______"]}]}, {"label": "Salesperson for BUSINESS", "lines": [{"label": "When", "opts": ["At the start", "After the raise", "With a new country", "After ___ customers", "Date: ______"]}, {"label": "Gross per month", "opts": ["₪22,000", "₪28,000", "₪35,000", "Shares only, no salary", "Other: ______"]}]}, {"label": "Marketing", "lines": [{"label": "When", "opts": ["At the start", "After the raise", "With a new country", "After ___ customers", "Date: ______"]}, {"label": "Gross per month", "opts": ["₪18,000", "₪25,000", "₪32,000", "Shares only, no salary", "Other: ______"]}]}, {"label": "Partner manager in each foreign country", "lines": [{"label": "When", "opts": ["At the start", "After the raise", "With a new country", "After ___ customers", "Date: ______"]}, {"label": "Cost per month", "opts": ["$6,500", "$8,000", "$10,000", "Shares only, no salary", "Other: ______"]}]}, {"label": "Other role: ________________", "lines": [{"label": "When", "opts": ["At the start", "After the raise", "With a new country", "After ___ customers", "Date: ______"]}, {"label": "Gross per month", "opts": ["Shares only, no salary", "Other: ______"]}]}]}]}, {"head": "4. Running the company", "qs": [{"type": "single", "q": "Where do we work?", "opts": ["From home", "Shared desks (co-working)", "Our own office", "Other: ______________________"]}, {"type": "block", "q": "AI tools: what is a fixed monthly cost, and what grows with each employee?", "note": "Tick the tools we use. Fixed = paid once for the company. Per employee = paid again for each person who uses it.", "rows": [{"label": "Claude", "lines": [{"label": "Fixed per month", "opts": ["$0", "$200", "$500", "Other: ______"]}, {"label": "Per employee per month", "opts": ["$20", "$100", "$200", "Other: ______"]}]}, {"label": "ChatGPT", "lines": [{"label": "Fixed per month", "opts": ["$0", "$60", "$200", "Other: ______"]}, {"label": "Per employee per month", "opts": ["$20", "$25", "$200", "Other: ______"]}]}, {"label": "Cursor / coding tools", "lines": [{"label": "Fixed per month", "opts": ["$0", "$40", "$200", "Other: ______"]}, {"label": "Per employee per month", "opts": ["$20", "$40", "$200", "Other: ______"]}]}, {"label": "AI agents platform / API", "lines": [{"label": "Fixed per month", "opts": ["$100", "$300", "$600", "Other: ______"]}, {"label": "Per employee per month", "opts": ["$0", "$50", "$150", "Other: ______"]}]}, {"label": "Other AI tool: ________________", "lines": [{"label": "Fixed per month", "opts": ["Other: ______"]}, {"label": "Per employee per month", "opts": ["Other: ______"]}]}]}, {"type": "block", "q": "Each customer runs the AI on their own computer, so we pay no server or cloud cost per customer - only the Paddle billing fee. Please confirm, and give our fixed server costs.", "note": "", "rows": [{"label": "Cost per paying customer besides Paddle", "lines": [{"label": "Per customer per month", "opts": ["None - only Paddle", "Yes: $______", "Other: ______"]}]}, {"label": "Fixed servers: website, bridge server, model downloads", "lines": [{"label": "Per month", "opts": ["$50", "$150", "$300", "Other: ______"]}]}]}, {"type": "single", "q": "Bookkeeping, accountant and other overhead, per month?", "opts": ["₪4,000", "₪6,500", "₪10,000", "Other: ______________________"]}]}, {"head": "5. Getting to market", "qs": [{"type": "block", "q": "How do we reach customers? We market FREE so users upgrade to PRO, without heavy ad spending. But this is a professional product in a regulated field, so we may need conferences, market education and partners.", "note": "Tick what we should do, then its size.", "rows": [{"label": "Conferences and events", "lines": [{"label": "Per year", "opts": ["$10,000", "$20,000", "$40,000", "Other: ______"]}]}, {"label": "Market education (webinars, guides, privacy-officer community)", "lines": [{"label": "Per year", "opts": ["$10,000", "$25,000", "$50,000", "Other: ______"]}]}, {"label": "Paid ads (Google, LinkedIn)", "lines": [{"label": "Per year", "opts": ["$0", "$20,000", "$50,000", "Other: ______"]}]}, {"label": "Branding and website", "lines": [{"label": "One-off", "opts": ["$5,000", "$15,000", "$30,000", "Other: ______"]}]}, {"label": "Partners who get a share of revenue", "lines": [{"label": "Share of what they sell", "opts": ["10%", "20%", "30%", "Other: ______"]}]}, {"label": "Partners who get shares in the company", "lines": [{"label": "Shares per partner", "opts": ["0.5%", "1%", "2%", "Other: ______"]}]}, {"label": "Other: ________________", "lines": [{"label": "Per year", "opts": ["Other: ______"]}]}]}, {"type": "single", "q": "Launch budget for each new country (campaign, conferences, travel)?", "opts": ["$20,000", "$50,000", "$100,000", "Other: ______________________"]}]}, {"head": "6. Legal and certifications", "qs": [{"type": "multi", "q": "What do we need?", "opts": ["Legal opinion in Israel", "Customer contracts", "Trademarks", "Security check by an outside firm", "ISO 27001", "SOC 2", "Microsoft AppSource certification", "Insurance", "Other: ______________________"]}]}, {"head": "7. Anything else", "qs": [{"type": "text", "q": "Anything we forgot, and the costs you are least sure about:"}]}]</script>
+<script>
+(function(){
+var PARTS=JSON.parse(document.getElementById('data').textContent);
+var KEY='aib-ram-q1';
+var root=document.getElementById('parts');
+var ENDPOINT="https://formsubmit.co/ajax/galreiter@gmail.com",IDLE=60000,timer=null,dirty=false,sending=false,again=false;
+function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e;}
+function isFill(o){return /_{3,}/.test(o);}
+function clean(o){return o.replace(/\s*_{3,}\s*/g,' ___ ').trim();}
+var idc=0;
+function chips(name,opts,multi){
+  var box=el('div','chips');var fills=[];
+  opts.forEach(function(o,i){
+    var lab=el('label','chip');var inp=document.createElement('input');inp.id='i'+(idc++);
+    inp.type=multi?'checkbox':'radio';inp.name=name;inp.value=o;inp.dataset.i=i;
+    lab.appendChild(inp);lab.appendChild(el('span',null,/^Other/.test(o)?'Other':(isFill(o)?clean(o):o)));box.appendChild(lab);
+    if(isFill(o)){var f=document.createElement('input');f.type='text';f.id='i'+(idc++);f.className='fill';f.hidden=true;f.dataset.for=name+'#'+i;f.placeholder=/^Other/.test(o)?'Write your answer':clean(o).replace('___','...');fills.push([inp,f]);}
+  });
+  var wrap=el('div');wrap.appendChild(box);fills.forEach(function(p){wrap.appendChild(p[1]);});
+  wrap._sync=function(){fills.forEach(function(p){p[1].hidden=!p[0].checked;});};
+  box.addEventListener('change',function(){wrap._sync();changed();});
+  wrap.addEventListener('input',function(e){if(e.target.classList.contains('fill'))changed();});
+  return wrap;
+}
+var questions=[];
+PARTS.forEach(function(part){
+  root.appendChild(el('h2',null,part.head));
+  part.qs.forEach(function(q){
+    var n=questions.length+1;var card=el('section','q');
+    var t=el('p','t',n+'. '+q.q);if(q.type==='multi'){t.appendChild(document.createTextNode(' '));t.appendChild(el('span','many','(choose all that apply)'));}
+    card.appendChild(t);var rec={q:q,n:n,part:part.head};
+    if(q.note)card.appendChild(el('p','n',q.note));
+    if(q.type==='single'||q.type==='multi'){rec.w=chips('q'+n,q.opts,q.type==='multi');card.appendChild(rec.w);}
+    else if(q.type==='text'){rec.ta=document.createElement('textarea');rec.ta.id='q'+n;rec.ta.addEventListener('input',changed);card.appendChild(rec.ta);}
+    else{rec.rows=[];
+      q.rows.forEach(function(r,ri){
+        var row=el('div','row');var head=el('label','rowhead');var cb=document.createElement('input');cb.type='checkbox';cb.id='q'+n+'r'+ri;
+        head.appendChild(cb);head.appendChild(document.createTextNode(isFill(r.label)?r.label.replace(/[:\s]*_{3,}.*$/,''):r.label));row.appendChild(head);
+        var nm=null;if(isFill(r.label)){nm=document.createElement('input');nm.type='text';nm.id='q'+n+'r'+ri+'n';nm.className='rowname';nm.placeholder='Write which';nm.hidden=true;nm.addEventListener('input',changed);row.appendChild(nm);}
+        var body=el('div','rowbody');body.hidden=true;var lines=[];
+        r.lines.forEach(function(l,li){var line=el('div','line');line.appendChild(el('b',null,isFill(l.label)?clean(l.label):l.label));var w=chips('q'+n+'r'+ri+'l'+li,l.opts,false);line.appendChild(w);body.appendChild(line);lines.push({label:l.label,w:w});});
+        row.appendChild(body);
+        var rr={r:r,row:row,cb:cb,nm:nm,body:body,lines:lines};
+        rr.sync=function(){body.hidden=!cb.checked;if(nm)nm.hidden=!cb.checked;};
+        cb.addEventListener('change',function(){rr.sync();changed();});
+        rec.rows.push(rr);card.appendChild(row);});
+    }
+    root.appendChild(card);questions.push(rec);
+  });
+});
+function pick(w){var out=[];w.querySelectorAll('input[type=radio]:checked,input[type=checkbox]:checked').forEach(function(inp){
+  var v=inp.value;var f=w.querySelector('.fill[data-for="'+inp.name+'#'+inp.dataset.i+'"]');
+  if(f){var x=f.value.trim();v=/^Other/.test(v)?('Other: '+(x||'(not filled)')):clean(v).replace('___',x||'___');}
+  out.push(v);});return out.join('; ');}
+function collect(){var rows=[];
+  questions.forEach(function(rec){var base={part:rec.part,n:rec.n,question:rec.q.q};
+    if(rec.w){var a=pick(rec.w);if(a)rows.push(Object.assign({},base,{item:'',detail:'',answer:a}));}
+    else if(rec.ta){var v=rec.ta.value.trim();if(v)rows.push(Object.assign({},base,{item:'',detail:'',answer:v}));}
+    else rec.rows.forEach(function(r){if(!r.cb.checked)return;var item=r.nm?('Other: '+(r.nm.value.trim()||'(not named)')):r.r.label;var any=false;
+      r.lines.forEach(function(l){var a=pick(l.w);if(a){any=true;rows.push(Object.assign({},base,{item:item,detail:l.label.replace(/_+/g,'...'),answer:a}));}});
+      if(!any)rows.push(Object.assign({},base,{item:item,detail:'',answer:'(ticked, no details yet)'}));});
+  });return rows;}
+function answered(){var s=0;questions.forEach(function(rec){if(rec.w&&pick(rec.w))s++;else if(rec.ta&&rec.ta.value.trim())s++;else if(rec.rows&&rec.rows.some(function(r){return r.cb.checked;}))s++;});return s;}
+function progress(){var a=answered(),t=questions.length;document.getElementById('bar').style.width=(100*a/t)+'%';document.getElementById('count').textContent=a+' of '+t+' questions answered';}
+function snapshot(){var st={};document.querySelectorAll('#parts input,#parts textarea').forEach(function(e){st[e.id]=(e.type==='checkbox'||e.type==='radio')?e.checked:e.value;});return st;}
+function apply(st){if(!st)return;document.querySelectorAll('#parts input,#parts textarea').forEach(function(e){if(!(e.id in st))return;if(e.type==='checkbox'||e.type==='radio')e.checked=!!st[e.id];else e.value=st[e.id];});
+  questions.forEach(function(rec){if(rec.w)rec.w._sync();if(rec.rows)rec.rows.forEach(function(r){r.sync();r.lines.forEach(function(l){l.w._sync();});});});progress();}
+function setSave(text,cls){var s=document.getElementById('save');s.textContent=text;s.className=cls;}
+var sid=null;try{sid=localStorage.getItem(KEY+'-sid');}catch(e){}
+if(!sid){sid=Math.random().toString(36).slice(2,8);try{localStorage.setItem(KEY+'-sid',sid);}catch(e){}}
+function changed(){progress();try{localStorage.setItem(KEY,JSON.stringify(snapshot()));}catch(e){}
+  dirty=true;setSave('Saving...','saving');clearTimeout(timer);timer=setTimeout(send,IDLE);}
+function form(){var a=answered(),t=questions.length,fd=new FormData(),seen={};
+  fd.append('_subject','AI-BRIDGE questionnaire from Ram: '+a+' of '+t+' answered');
+  fd.append('_template','table');fd.append('_captcha','false');
+  fd.append('Answered',a+' of '+t+' questions');fd.append('Sent at',new Date().toLocaleString());fd.append('Respondent code',sid);
+  collect().forEach(function(r){var k='Q'+r.n+'. '+r.question+(r.item?' | '+r.item:'')+(r.detail?' | '+r.detail:'');
+    if(seen[k]){seen[k]++;k+=' ('+seen[k]+')';}else seen[k]=1;fd.append(k,r.answer);});
+  return fd;}
+function send(){clearTimeout(timer);if(!dirty)return;if(sending){again=true;return;}sending=true;dirty=false;
+  fetch(ENDPOINT,{method:'POST',headers:{'Accept':'application/json'},body:form()}).then(function(r){return r.json();})
+  .then(function(j){if(j&&(j.success===true||j.success==='true'))setSave('Sent - Gal has your answers','saved');else throw 0;})
+  .catch(function(){dirty=true;setSave('Not sent yet - your answers stay on this device and will be sent again','warn');timer=setTimeout(send,IDLE);})
+  .then(function(){sending=false;if(again){again=false;send();}});}
+function leave(){if(!dirty)return;try{if(navigator.sendBeacon&&navigator.sendBeacon(ENDPOINT,form())){dirty=false;}}catch(e){}}
+document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden')leave();});
+window.addEventListener('pagehide',leave);
+try{apply(JSON.parse(localStorage.getItem(KEY)||'null'));}catch(e){}
+progress();
+if(answered())setSave('Your earlier answers are here - change anything you like','saved');
+})();
+</script>
+</body></html>
