@@ -142,7 +142,7 @@ function form(){var a=answered(),t=questions.length,fd=new FormData(),seen={};
     if(seen[k]){seen[k]++;k+=' ('+seen[k]+')';}else seen[k]=1;fd.append(k,r.answer);});
   return fd;}
 function send(){clearTimeout(timer);if(!dirty)return;if(sending){again=true;return;}sending=true;dirty=false;
-  fetch(ENDPOINT,{method:'POST',headers:{'Accept':'application/json'},body:form()}).then(function(r){return r.json();})
+  fetch(ENDPOINT,{method:'POST',keepalive:true,headers:{'Accept':'application/json'},body:form()}).then(function(r){return r.json();})
   .then(function(j){if(j&&(j.success===true||j.success==='true'))setSave('Sent - Gal has your answers','saved');else throw 0;})
   .catch(function(){dirty=true;setSave('Not sent yet - your answers stay on this device and will be sent again','warn');timer=setTimeout(send,IDLE);})
   .then(function(){sending=false;if(again){again=false;send();}});}
