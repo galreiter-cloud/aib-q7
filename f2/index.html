@@ -1,0 +1,179 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><title>AI-BRIDGE Follow-up for Ram</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap">
+<style>
+/* Layout: one calm reading column; each question a card; ticked items open their follow-up lines. */
+:root{--bg:#f4f7f7;--card:#ffffff;--fg:#17242a;--mute:#5b6b70;--line:#d8e1e3;--accent:#0f5257;--accent-fg:#ffffff;--soft:#e3eeef;--ok:#1f7a45;--warn:#9a5b00;
+--display:"Space Grotesk",system-ui,sans-serif;--body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1719;--card:#162225;--fg:#e4eeef;--mute:#9db0b4;--line:#2a3a3e;--accent:#5fb3b9;--accent-fg:#06272a;--soft:#1d3135;--ok:#6fcf97;--warn:#f2b45c;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1719;--card:#162225;--fg:#e4eeef;--mute:#9db0b4;--line:#2a3a3e;--accent:#5fb3b9;--accent-fg:#06272a;--soft:#1d3135;--ok:#6fcf97;--warn:#f2b45c;color-scheme:dark}
+*{box-sizing:border-box}html,body{margin:0}[hidden]{display:none!important}.nav{display:flex;justify-content:space-between;gap:12px;margin-top:16px}.btn{min-height:44px;padding:10px 24px;border-radius:999px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-fg);font:600 16px var(--body);cursor:pointer}.btn.ghost{background:transparent;color:var(--accent)}.btn:disabled{opacity:.35;cursor:default}.done .btn{margin-top:12px}.q .part{font-size:13px;color:var(--mute);margin:0 0 6px}.q{min-height:200px}
+body{background:var(--bg);color:var(--fg);font:16px/1.55 var(--body)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:760px;margin:0 auto;padding-block:24px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1{font:600 clamp(26px,5.5vw,34px)/1.15 var(--display);color:var(--accent);margin:8px 0 12px;text-wrap:balance}
+.intro p{color:var(--mute);margin:0 0 10px;max-width:65ch}
+.status{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding:10px 0;display:flex;flex-direction:column;gap:6px}
+.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .25s}
+.meta{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--mute);font-variant-numeric:tabular-nums}
+.saved{color:var(--ok)}.saving{color:var(--mute)}.warn{color:var(--warn)}
+h2{font:600 20px/1.3 var(--display);color:var(--accent);margin:32px 0 12px;letter-spacing:.01em}
+.q{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin:0 0 14px}
+.q .t{font-weight:600;margin:0 0 4px}
+.q .n{color:var(--mute);font-size:14px;margin:0 0 10px}
+.many{color:var(--mute);font-weight:400;font-size:13px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.chip span{display:inline-flex;align-items:center;min-height:40px;padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--fg);font-size:15px;cursor:pointer;user-select:none}
+.chip input:checked+span{background:var(--accent);border-color:var(--accent);color:var(--accent-fg)}
+.chip input:focus-visible+span{outline:3px solid var(--soft);outline-offset:2px}
+.fill,.rowname,textarea{width:100%;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--fg);font:inherit;padding:8px 12px}
+.fill{max-width:360px;min-height:40px;margin-top:8px}
+.row{border-top:1px solid var(--line);padding:12px 0 4px}
+.row:first-of-type{border-top:0}
+.rowhead{display:flex;align-items:center;gap:10px;min-height:40px;cursor:pointer;font-weight:600}
+.rowhead input{width:22px;height:22px;accent-color:var(--accent);flex:none;cursor:pointer}
+.rowname{max-width:360px;min-height:40px;margin:6px 0 0 32px;width:calc(100% - 32px)}
+.rowbody{margin:6px 0 6px 32px;min-width:0}
+.line{margin:8px 0 10px}
+.line>b{display:block;font-weight:500;color:var(--mute);font-size:14px}
+textarea{min-height:120px}
+.done{margin-top:24px;padding:16px;border-radius:12px;background:var(--soft);color:var(--fg)}
+.owner{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin:16px 0}
+.owner h2{margin-top:0}
+.owner .who{font-weight:600;margin:12px 0 6px}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{color:var(--mute);font-weight:500}
+@media (max-width:520px){.q{padding:14px}.rowbody,.rowname{margin-left:0;width:100%}}
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}}
+</style></head><body>
+<div class="wrap">
+<header class="intro">
+<h1>AI-BRIDGE: follow-up questions for Ram</h1>
+<p>Thanks for round 1. These are short follow-ups, only on what was still open. Rough answers are fine, and anything can change later.</p>
+<p>One question at a time. Tap an answer and the next question comes up. Where it says so, you can choose more than one. If nothing fits, choose Other and write yours. Rough answers are fine. <b>Your answers reach Gal by themselves as you go. There is nothing to send.</b></p>
+</header>
+<div class="status"><div class="bar"><i id="bar"></i></div><div class="meta"><span id="count"></span><span id="save" class="saving">Your answers will reach Gal by themselves</span></div></div>
+<main id="parts"></main>
+<p class="done" id="done">Thank you, that's it! Your answers are on their way to Gal. You can come back to this page and change answers at any time.</p>
+</div>
+<script id="data" type="application/json">[{"head": "1. Training: hardware and cloud", "qs": [{"type": "single", "q": "You said we should buy our own hardware for training, shared by all countries. How big is the first purchase?", "opts": ["$25,000", "$50,000", "$100,000", "$200,000", "Other: ______________________"]}, {"type": "single", "q": "When do we buy it?", "opts": ["Now, before the raise", "Right after the raise", "With the first new country", "Other: ______________________"]}, {"type": "single", "q": "For each extra country we train at the same time, how much more hardware do we need?", "opts": ["None - the first purchase is enough", "+25%", "+50%", "Double", "Other: ______________________"]}, {"type": "single", "q": "The cloud alternative: what does it cost to train on 1 million documents in a new language?", "opts": ["About $5,000", "About $20,000", "About $50,000", "Still checking - I'll send it later", "Other: ______________________"]}]}, {"head": "2. A new country", "qs": [{"type": "single", "q": "How many local experts (language and law) do we need to fine-tune the model for a new country?", "opts": ["1", "2", "3-5", "Other: ______________________"]}, {"type": "single", "q": "For how long do we need them?", "opts": ["1 month", "2 months", "3 months", "Ongoing, part-time", "Other: ______________________"]}]}, {"head": "3. Team and pay", "qs": [{"type": "single", "q": "The developer at ₪50,000 a month: what does this number mean?", "opts": ["Gross salary (the company pays about 30% more on top)", "The full cost to the company", "Other: ______________________"]}, {"type": "single", "q": "Does each developer we add cost the same?", "opts": ["Yes, the same", "No, the next ones cost less: ₪___ a month", "Other: ______________________"]}, {"type": "single", "q": "Advisors: how many do we need in the first 2 years?", "opts": ["1-2", "3-4", "5 or more", "Other: ______________________"]}, {"type": "single", "q": "How do we pay the advisors?", "opts": ["Shares only", "Cash: ₪___ a month each", "A mix of shares and cash", "Other: ______________________"]}, {"type": "single", "q": "The 6 AI accounts per employee ($200 each): from when?", "opts": ["Already today", "After the raise", "From the day each person joins", "Other: ______________________"]}]}, {"head": "4. Running costs", "qs": [{"type": "single", "q": "Please confirm: the only cost for each paying customer is the Paddle fee (no servers or cloud per customer)?", "opts": ["Yes, only Paddle", "No, also: $___ per customer per month", "Other: ______________________"]}, {"type": "block", "q": "You said we forgot these costs. Roughly how much is each?", "note": "Tick an item, then the one-time cost and the monthly cost. Rough numbers are fine.", "rows": [{"label": "Infrastructure (network, backups, security tools)", "lines": [{"label": "One-time", "opts": ["$0", "$5,000", "$15,000", "Other: ______"]}, {"label": "Per month", "opts": ["$0", "$200", "$500", "Other: ______"]}]}, {"label": "Everyday hardware (laptops, screens)", "lines": [{"label": "One-time", "opts": ["$0", "$5,000", "$15,000", "Other: ______"]}, {"label": "Per month", "opts": ["$0", "$200", "$500", "Other: ______"]}]}, {"label": "Communications (phones, internet)", "lines": [{"label": "One-time", "opts": ["$0", "$5,000", "$15,000", "Other: ______"]}, {"label": "Per month", "opts": ["$0", "$200", "$500", "Other: ______"]}]}, {"label": "Office equipment", "lines": [{"label": "One-time", "opts": ["$0", "$5,000", "$15,000", "Other: ______"]}, {"label": "Per month", "opts": ["$0", "$200", "$500", "Other: ______"]}]}, {"label": "Other: ________________", "lines": [{"label": "One-time", "opts": ["$0", "$5,000", "$15,000", "Other: ______"]}, {"label": "Per month", "opts": ["$0", "$200", "$500", "Other: ______"]}]}]}]}, {"head": "5. Anything else", "qs": [{"type": "text", "q": "Anything else you want to add or correct from round 1?"}]}]</script>
+<script>
+(function(){
+var PARTS=JSON.parse(document.getElementById('data').textContent);
+var KEY='aib-ram-q2';
+var root=document.getElementById('parts');
+var ENDPOINT="https://formsubmit.co/ajax/galreiter@gmail.com",IDLE=60000,timer=null,dirty=false,sending=false,again=false;
+function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e;}
+function isFill(o){return /_{3,}/.test(o);}
+function clean(o){return o.replace(/\s*_{3,}\s*/g,' ___ ').trim();}
+var idc=0;
+function chips(name,opts,multi){
+  var box=el('div','chips');var fills=[];
+  opts.forEach(function(o,i){
+    var lab=el('label','chip');var inp=document.createElement('input');inp.id='i'+(idc++);
+    inp.type=multi?'checkbox':'radio';inp.name=name;inp.value=o;inp.dataset.i=i;
+    lab.appendChild(inp);lab.appendChild(el('span',null,/^Other/.test(o)?'Other':(isFill(o)?clean(o):o)));box.appendChild(lab);
+    if(isFill(o)){var f=document.createElement('input');f.type='text';f.id='i'+(idc++);f.className='fill';f.hidden=true;f.dataset.for=name+'#'+i;f.placeholder=/^Other/.test(o)?'Write your answer':clean(o).replace('___','...');fills.push([inp,f]);}
+  });
+  var wrap=el('div');wrap.appendChild(box);fills.forEach(function(p){wrap.appendChild(p[1]);});
+  wrap._sync=function(){fills.forEach(function(p){p[1].hidden=!p[0].checked;});};
+  box.addEventListener('change',function(){wrap._sync();changed();});
+  wrap.addEventListener('input',function(e){if(e.target.classList.contains('fill'))changed();});
+  return wrap;
+}
+var questions=[];
+PARTS.forEach(function(part){
+  root.appendChild(el('h2',null,part.head));
+  part.qs.forEach(function(q){
+    var n=questions.length+1;var card=el('section','q');
+    var t=el('p','t',n+'. '+q.q);if(q.type==='multi'){t.appendChild(document.createTextNode(' '));t.appendChild(el('span','many','(choose all that apply)'));}
+    card.appendChild(t);var rec={q:q,n:n,part:part.head};
+    if(q.note)card.appendChild(el('p','n',q.note));
+    if(q.type==='single'||q.type==='multi'){rec.w=chips('q'+n,q.opts,q.type==='multi');card.appendChild(rec.w);}
+    else if(q.type==='text'){rec.ta=document.createElement('textarea');rec.ta.id='q'+n;rec.ta.addEventListener('input',changed);card.appendChild(rec.ta);}
+    else{rec.rows=[];
+      q.rows.forEach(function(r,ri){
+        var row=el('div','row');var head=el('label','rowhead');var cb=document.createElement('input');cb.type='checkbox';cb.id='q'+n+'r'+ri;
+        head.appendChild(cb);head.appendChild(document.createTextNode(isFill(r.label)?r.label.replace(/[:\s]*_{3,}.*$/,''):r.label));row.appendChild(head);
+        var nm=null;if(isFill(r.label)){nm=document.createElement('input');nm.type='text';nm.id='q'+n+'r'+ri+'n';nm.className='rowname';nm.placeholder='Write which';nm.hidden=true;nm.addEventListener('input',changed);row.appendChild(nm);}
+        var body=el('div','rowbody');body.hidden=true;var lines=[];
+        r.lines.forEach(function(l,li){var line=el('div','line');line.appendChild(el('b',null,isFill(l.label)?clean(l.label):l.label));var w=chips('q'+n+'r'+ri+'l'+li,l.opts,false);line.appendChild(w);body.appendChild(line);lines.push({label:l.label,w:w});});
+        row.appendChild(body);
+        var rr={r:r,row:row,cb:cb,nm:nm,body:body,lines:lines};
+        rr.sync=function(){body.hidden=!cb.checked;if(nm)nm.hidden=!cb.checked;};
+        cb.addEventListener('change',function(){rr.sync();changed();});
+        rec.rows.push(rr);card.appendChild(row);});
+    }
+    root.appendChild(card);questions.push(rec);
+  });
+});
+function pick(w){var out=[];w.querySelectorAll('input[type=radio]:checked,input[type=checkbox]:checked').forEach(function(inp){
+  var v=inp.value;var f=w.querySelector('.fill[data-for="'+inp.name+'#'+inp.dataset.i+'"]');
+  if(f){var x=f.value.trim();v=/^Other/.test(v)?('Other: '+(x||'(not filled)')):clean(v).replace('___',x||'___');}
+  out.push(v);});return out.join('; ');}
+function collect(){var rows=[];
+  questions.forEach(function(rec){var base={part:rec.part,n:rec.n,question:rec.q.q};
+    if(rec.w){var a=pick(rec.w);if(a)rows.push(Object.assign({},base,{item:'',detail:'',answer:a}));}
+    else if(rec.ta){var v=rec.ta.value.trim();if(v)rows.push(Object.assign({},base,{item:'',detail:'',answer:v}));}
+    else rec.rows.forEach(function(r){if(!r.cb.checked)return;var item=r.nm?('Other: '+(r.nm.value.trim()||'(not named)')):r.r.label;var any=false;
+      r.lines.forEach(function(l){var a=pick(l.w);if(a){any=true;rows.push(Object.assign({},base,{item:item,detail:l.label.replace(/_+/g,'...'),answer:a}));}});
+      if(!any)rows.push(Object.assign({},base,{item:item,detail:'',answer:'(ticked, no details yet)'}));});
+  });return rows;}
+function answered(){var s=0;questions.forEach(function(rec){if(rec.w&&pick(rec.w))s++;else if(rec.ta&&rec.ta.value.trim())s++;else if(rec.rows&&rec.rows.some(function(r){return r.cb.checked;}))s++;});return s;}
+function progress(){var a=answered(),t=questions.length;document.getElementById('bar').style.width=(100*a/t)+'%';document.getElementById('count').textContent=a+' of '+t+' questions answered';}
+function snapshot(){var st={};document.querySelectorAll('#parts input,#parts textarea').forEach(function(e){st[e.id]=(e.type==='checkbox'||e.type==='radio')?e.checked:e.value;});return st;}
+function apply(st){if(!st)return;document.querySelectorAll('#parts input,#parts textarea').forEach(function(e){if(!(e.id in st))return;if(e.type==='checkbox'||e.type==='radio')e.checked=!!st[e.id];else e.value=st[e.id];});
+  questions.forEach(function(rec){if(rec.w)rec.w._sync();if(rec.rows)rec.rows.forEach(function(r){r.sync();r.lines.forEach(function(l){l.w._sync();});});});progress();}
+function setSave(text,cls){var s=document.getElementById('save');s.textContent=text;s.className=cls;}
+var sid=null;try{sid=localStorage.getItem(KEY+'-sid');}catch(e){}
+if(!sid){sid=Math.random().toString(36).slice(2,8);try{localStorage.setItem(KEY+'-sid',sid);}catch(e){}}
+function changed(){progress();try{localStorage.setItem(KEY,JSON.stringify(snapshot()));}catch(e){}
+  dirty=true;setSave('Saving...','saving');clearTimeout(timer);timer=setTimeout(send,IDLE);}
+function form(){var a=answered(),t=questions.length,fd=new FormData(),seen={};
+  fd.append('_subject','AI-BRIDGE follow-up from Ram: '+a+' of '+t+' answered');
+  fd.append('_template','table');fd.append('_captcha','false');
+  fd.append('Answered',a+' of '+t+' questions');fd.append('Sent at',new Date().toLocaleString());fd.append('Respondent code',sid);
+  collect().forEach(function(r){var k='Q'+r.n+'. '+r.question+(r.item?' | '+r.item:'')+(r.detail?' | '+r.detail:'');
+    if(seen[k]){seen[k]++;k+=' ('+seen[k]+')';}else seen[k]=1;fd.append(k,r.answer);});
+  return fd;}
+function send(){clearTimeout(timer);if(!dirty)return;if(sending){again=true;return;}sending=true;dirty=false;
+  fetch(ENDPOINT,{method:'POST',keepalive:true,headers:{'Accept':'application/json'},body:form()}).then(function(r){return r.json();})
+  .then(function(j){if(j&&(j.success===true||j.success==='true'))setSave('Sent - Gal has your answers','saved');else throw 0;})
+  .catch(function(){dirty=true;setSave('Not sent yet - your answers stay on this device and will be sent again','warn');timer=setTimeout(send,IDLE);})
+  .then(function(){sending=false;if(again){again=false;send();}});}
+function leave(){if(!dirty)return;try{if(navigator.sendBeacon&&navigator.sendBeacon(ENDPOINT,form())){dirty=false;}}catch(e){}}
+document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden')leave();});
+window.addEventListener('pagehide',leave);
+try{apply(JSON.parse(localStorage.getItem(KEY)||'null'));}catch(e){}
+progress();
+if(answered())setSave('Your earlier answers are here - change anything you like','saved');
+/* One question per screen (Gal 24.11): a single-choice tap moves on by itself; multi/table questions use Next. */
+var cards=[].slice.call(root.querySelectorAll('.q'));root.querySelectorAll('h2').forEach(function(h){h.hidden=true;});
+cards.forEach(function(c,i){c.insertBefore(el('p','part',questions[i].part),c.firstChild);});
+var nav=el('div','nav'),back=el('button','btn ghost','Back'),next=el('button','btn','Next');back.type='button';next.type='button';
+nav.appendChild(back);nav.appendChild(next);root.appendChild(nav);
+var done=document.getElementById('done'),intro=document.querySelector('.intro');
+var again2=el('button','btn ghost','Go back and change answers');again2.type='button';done.appendChild(document.createElement('br'));done.appendChild(again2);
+var cur=0;try{cur=Math.min(parseInt(localStorage.getItem(KEY+'-cur')||'0',10)||0,cards.length);}catch(e){}
+function has(rec){return !!((rec.w&&pick(rec.w))||(rec.ta&&rec.ta.value.trim())||(rec.rows&&rec.rows.some(function(r){return r.cb.checked;})));}
+function label(){if(cur<cards.length)next.textContent=cur===cards.length-1?'Finish':(has(questions[cur])?'Next':'Skip');}
+function show(){var end=cur>=cards.length;cards.forEach(function(c,i){c.hidden=i!==cur;});nav.hidden=end;done.hidden=!end;intro.hidden=cur>0&&!end;
+  back.disabled=cur===0;label();try{localStorage.setItem(KEY+'-cur',String(cur));}catch(e){}window.scrollTo(0,0);}
+function go(d){cur=Math.max(0,Math.min(cards.length,cur+d));if(cur>=cards.length){dirty=true;send();}show();}
+next.addEventListener('click',function(){go(1);});back.addEventListener('click',function(){go(-1);});
+again2.addEventListener('click',function(){cur=cards.length-1;show();});
+var auto=null;
+root.addEventListener('change',function(e){label();var t=e.target,rec=questions[cur];
+  if(!rec||t.type!=='radio'||rec.q.type!=='single'||!rec.w||!rec.w.contains(t))return;
+  var f=rec.w.querySelector('.fill:not([hidden])');if(f){f.focus();return;}
+  clearTimeout(auto);auto=setTimeout(function(){go(1);},350);});
+root.addEventListener('input',label);
+show();
+})();
+</script>
+</body></html>
